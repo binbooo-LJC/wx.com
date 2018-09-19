@@ -1,0 +1,65 @@
+{extend name="base" /}
+{block name="body"}
+<div class="layui-body">
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class=""><a href="{:url('admin/user/userbill',['id'=>$re.userid])}">做工记录</a></li>
+            <li class="layui-this">修改记录</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <form class="layui-form form-container" action="{:url('admin/user/updatebill',['id'=>$id,'user_id'  =>$re.userid])}" method="post">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">职工姓名</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="username" value="{$re.username}" required lay-verify="required" placeholder="职工姓名" class="layui-input" disabled>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">衣服种类</label>
+                        <div class="layui-input-block">
+                            <select name="project" lay-verify="">
+                                {foreach name='project' item='vo'}
+                                <option value="{$vo.id}"  {eq name="$re.project" value="$vo.id"} selected {/eq}>{$vo.name}</option>
+                                {/foreach}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">做工数量</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="num" value="{$re.num}" required lay-verify="required" placeholder="做工数量" class="layui-input" >
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">做工数量</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="num" value="{$re.num}" required lay-verify="required" placeholder="做工数量" class="layui-input" >
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                    <label class="layui-form-label">状态</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="statue" value="1" title="已结算" {$re.statue} {eq name="$re.statue" value="1"} checked {/eq}>
+                        <input type="radio" name="statue" value="0" title="待结算"  {eq name="$re.statue" value="0"} checked {/eq}>
+                    </div>
+                </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">备注</label>
+                        <div class="layui-input-block">
+                            <textarea name="mark" placeholder="50字以内">{$re.mark}</textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit lay-filter="*">保存</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
