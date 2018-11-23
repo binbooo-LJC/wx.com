@@ -1,0 +1,50 @@
+{extend name="base" /}
+{block name="body"}
+<div class="layui-body">
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class="layui-this">衣服种类数量统计</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <form class="layui-form layui-form-pane" action="{:url('admin/projectlist/index')}" method="get">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">关键词</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="keyword" value="{$keyword}" placeholder="请输入关键词" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <button class="layui-btn">搜索</button>
+                    </div>
+                </form>
+                <hr>
+                <table class="layui-table table">
+                    <thead>
+                    <tr>
+
+
+                        <th>衣服种类名</th>
+                        <th>数量</th>
+                        <th>单位</th>
+                    </tr>
+                    </thead>
+                    <tbody class="code">
+                    {foreach name="list" item="vo"}
+
+                    <td>{$vo.name}</td>
+                    <td>{$vo.sum}</td>
+                    <td>{$vo.unit}</td>
+                    </tr>
+                    {/foreach}
+                    </tbody>
+                </table>
+                <!--分页--> {$list->render()}
+
+
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

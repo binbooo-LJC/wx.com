@@ -121,7 +121,12 @@ class Project extends AdminBase
 
    }
 
-   public function indexlist(){
-
-   }
+    public function indexlist($keyword='',$page=1){
+        $map=[];
+        if($keyword){
+            $map['b.name']=['like', "%{$keyword}%"];
+        }
+        $list=Db::name('consume')->alias('a')->join('think_project b','a.project=b.id')->where($map)->field('b.unit,b.name,sum(num) sum')->group('a.project')->paginate(30, false, ['page' => $page]);
+        return $this->fetch('indexlist',['list'=>$list,'keyword'=>$keyword]);
+    }
 }
